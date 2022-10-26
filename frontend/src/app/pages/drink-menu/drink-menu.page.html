@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar class="header-wrapper">
+    <h1 class="header-title">WELCOME TO TRAM COFFEE SHOP</h1>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="drinks && drinks.items">
+  <div style="display: flex; justify-content: center; padding-top: 20px;">
+    <ion-card class="display-drink" *ngFor="let drink of Object.keys(drinks.items)"
+      (click)="openForm(drinks.items[drink])">
+      <ion-card-header>
+        <ion-card-title>{{drinks.items[drink].title}}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <app-drink-graphic [drink]="drinks.items[drink]"></app-drink-graphic>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="display-drink" (click)="openForm(true)" *ngIf="auth.can('post:drinks')">
+      <ion-card-header>
+        <ion-card-title>Add Drink</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="add-content">
+        <ion-icon name="add-circle"></ion-icon>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

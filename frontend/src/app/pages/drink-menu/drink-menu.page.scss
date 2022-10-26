@@ -1,0 +1,27 @@
+@import url('https://fonts.googleapis.com/css?family=Playfair+Display:400,900&display=swap');
+
+.header-wrapper {
+    text-align: center
+}
+
+.header-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.7em;
+    font-weight: bold;
+}
+
+.display-drink {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.opct {
+    opacity: .7;
+}
+
+.add-content {
+    font-size: 250%;
+    color: black;
+}
