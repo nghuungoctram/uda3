@@ -23,7 +23,7 @@ def get_drinks_method():
 # GET DETAIL DRINKS
 @app.route('/drinks-detail', methods=['GET'])
 @requires_auth('get:drinks-detail')
-def get_drinks_detail_method():
+def get_drinks_detail_method(param):
     return jsonify(
         success=True,
         drinks=[drink.long() for drink in (Drink.query.all())]
@@ -33,10 +33,10 @@ def get_drinks_detail_method():
 # ADD NEW DRINK
 @app.route('/drinks', methods=['POST'])
 @requires_auth('post:drinks')
-def add_new_drink_method():
+def add_new_drink_method(param):
     body = request.get_json()
 
-    if ((body.get('title', None)) is None & (body.get('recipe', None)) is None):
+    if ((body.get('title', None) is None) & (body.get('recipe', None) is None)):
         abort(400, 'TITLE OR/AND RECIPE is none')
 
     newDrink = Drink(title=body.get('title', None),
@@ -74,15 +74,13 @@ def update_drink_by_id_method(id):
 # DELETE DRINK
 @app.route('/drinks/<int:id>', methods=['DELETE'])
 @requires_auth('delete:drinks')
-def delete_drink_using_id_method(id):
-    if ((Drink.query.get(id=id)) is None):
+def delete_drink_using_id_method(param, id):
+    print(param)
+    print(id)
+    if (Drink.query.filter(Drink.id == id) is None):
         abort(404, 'Drink not found')
     else:
-        try:
-            (Drink.query.filter_by(id=id).first()).delete()
-        except:
-            abort(400, 'got Bad request error')
-
+        Drink.query.filter_by(id=id).first().delete()
     return jsonify(
         success=True,
         delete=id

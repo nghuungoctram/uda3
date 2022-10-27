@@ -43,7 +43,6 @@ def get_token_from_authorization_header():
             'description': 'Authorization header must start with "Bearer" base on the format.'
         }, 401)
 
-    print(authSplit[1])
     return authSplit[1]
 
 
