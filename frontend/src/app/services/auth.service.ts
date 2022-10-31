@@ -13,7 +13,6 @@ export class AuthService {
   audience = environment.auth0.audience;
   clientId = environment.auth0.clientId;
   callbackURL = environment.auth0.callbackURL;
-
   token: string;
   payload: any;
 
@@ -29,12 +28,8 @@ export class AuthService {
     return path;
   }
 
-  checkValidToken() {
-    const fragment = window.location.hash.substr(1).split('&')[0].split('=');
-    if (fragment[0] === 'access_token') {
-      this.token = fragment[1];
-      this.setJWT();
-    }
+  isPermissionAccepted(permission: string) {
+    return (this.payload && this.payload.permissions && this.payload.permissions.length && this.payload.permissions.indexOf(permission) >= 0) ? true : false;
   }
 
   setJWT() {
@@ -51,14 +46,12 @@ export class AuthService {
     }
   }
 
-  activeJWT() {
-    return this.token;
-  }
-
-  decodeJWT(token: string) {
-    const jwtservice = new JwtHelperService();
-    this.payload = jwtservice.decodeToken(token);
-    return this.payload;
+  checkValidToken() {
+    const fragment = window.location.hash.substr(1).split('&')[0].split('=');
+    if (fragment[0] === 'access_token') {
+      this.token = fragment[1];
+      this.setJWT();
+    }
   }
 
   logoutUser() {
@@ -67,7 +60,13 @@ export class AuthService {
     this.setJWT();
   }
 
-  isPermissionAccepted(permission: string) {
-    return (this.payload && this.payload.permissions && this.payload.permissions.length && this.payload.permissions.indexOf(permission) >= 0) ? true : false;
+  activeJWT() {
+    return this.token;
+  }
+
+  decodeJWT(token: string) {
+    const jwtservice = new JwtHelperService();
+    this.payload = jwtservice.decodeToken(token);
+    return this.payload;
   }
 }

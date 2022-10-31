@@ -19,7 +19,7 @@ export class DrinkMenuPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.drinks.getDrinks();
+    this.drinks.getDrinkDetail();
   }
 
   async formOpened(activedrink: Drink = null) {

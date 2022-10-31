@@ -33,17 +33,17 @@ export class DrinkFormComponent implements OnInit {
     return idx;
   }
 
-  addMoreKindOfDrink(idx: number = 0) {
-    this.drink.recipe.splice(idx + 1, 0, { name: '', color: '#F98C60', parts: 2 });
+  removeKindOfDrink(idx: number) {
+    this.drink.recipe.splice(idx, 1);
   }
 
   saveEvent() {
-    this.drinkService.saveDrink(this.drink);
+    this.drinkService.drinkSaved(this.drink);
     this.closePopup();
   }
 
-  removeKindOfDrink(idx: number) {
-    this.drink.recipe.splice(idx, 1);
+  addMoreKindOfDrink(idx: number = 0) {
+    this.drink.recipe.splice(idx + 1, 0, { name: '', color: '#F98C60', parts: 1 });
   }
 
   deleteClicked() {
