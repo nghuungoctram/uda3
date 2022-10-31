@@ -21,7 +21,7 @@ export class DrinkFormComponent implements OnInit {
   ngOnInit() {
     if (this.isCreated) {
       this.drink = {
-        id: 0,
+        id: -1,
         title: '',
         recipe: []
       };

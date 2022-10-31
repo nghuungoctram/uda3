@@ -34,7 +34,7 @@ export class DrinksService {
   }
 
   getDrinks() {
-    if (this.auth.can('get:drinks-detail')) {
+    if (this.auth.isPermissionAccepted('get:drinks-detail')) {
       this.http.get(this.url + '/drinks-detail', this.getHeaders())
         .subscribe((res: any) => {
           this.drinksToItems(res.drinks);
@@ -45,7 +45,6 @@ export class DrinksService {
           this.drinksToItems(res.drinks);
         });
     }
-
   }
 
   saveDrink(drink: Drink) {

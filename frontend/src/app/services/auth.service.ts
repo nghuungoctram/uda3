@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-
 import { environment } from '../../environments/environment';
 
 const JWTS_LOCAL_KEY = 'JWTS_LOCAL_KEY';
@@ -20,33 +19,32 @@ export class AuthService {
 
   constructor() { }
 
-  build_login_link(callbackPath = '') {
-    let link = 'https://';
-    link += this.url + '.auth0.com';
-    link += '/authorize?';
-    link += 'audience=' + this.audience + '&';
-    link += 'response_type=token&';
-    link += 'client_id=' + this.clientId + '&';
-    link += 'redirect_uri=' + this.callbackURL + callbackPath;
-    return link;
+  loginPath(callbackPath = '') {
+    let path = 'https://';
+    path += this.url + '/authorize?';
+    path += 'audience=' + this.audience + '&';
+    path += 'response_type=token&';
+    path += 'client_id=' + this.clientId + '&';
+    path += 'redirect_uri=' + this.callbackURL + callbackPath;
+    return path;
   }
 
-  check_token_fragment() {
+  checkValidToken() {
     const fragment = window.location.hash.substr(1).split('&')[0].split('=');
     if (fragment[0] === 'access_token') {
       this.token = fragment[1];
-      this.set_jwt();
+      this.setJWT();
     }
   }
 
-  set_jwt() {
+  setJWT() {
     localStorage.setItem(JWTS_LOCAL_KEY, this.token);
     if (this.token) {
       this.decodeJWT(this.token);
     }
   }
 
-  load_jwts() {
+  getJWT() {
     this.token = localStorage.getItem(JWTS_LOCAL_KEY) || null;
     if (this.token) {
       this.decodeJWT(this.token);
@@ -63,13 +61,13 @@ export class AuthService {
     return this.payload;
   }
 
-  logout() {
+  logoutUser() {
     this.token = '';
     this.payload = null;
-    this.set_jwt();
+    this.setJWT();
   }
 
-  can(permission: string) {
-    return this.payload && this.payload.permissions && this.payload.permissions.length && this.payload.permissions.indexOf(permission) >= 0;
+  isPermissionAccepted(permission: string) {
+    return (this.payload && this.payload.permissions && this.payload.permissions.length && this.payload.permissions.indexOf(permission) >= 0) ? true : false;
   }
 }

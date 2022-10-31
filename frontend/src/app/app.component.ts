@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -24,9 +23,8 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      // Perform required auth actions
-      this.auth.load_jwts();
-      this.auth.check_token_fragment();
+      this.auth.getJWT();
+      this.auth.checkValidToken();
     });
   }
 }

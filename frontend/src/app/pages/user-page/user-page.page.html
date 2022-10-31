@@ -9,7 +9,7 @@
 </ion-content>
 
 <ion-content *ngIf="auth.token">
-  <ion-button (click)="auth.logout()">SIGN OUT</ion-button>
+  <ion-button (click)="auth.logoutUser()">SIGN OUT</ion-button>
   <div>
     <h1 class="user-management-pd">Active JWT</h1>
     <textarea class="user-management-token" [ngModel]="auth.token" name="Active JWT"></textarea>

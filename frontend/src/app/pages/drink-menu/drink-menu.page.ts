@@ -23,7 +23,7 @@ export class DrinkMenuPage implements OnInit {
   }
 
   async formOpened(activedrink: Drink = null) {
-    if (!this.auth.can('get:drinks-detail')) {
+    if (!this.auth.isPermissionAccepted('get:drinks-detail')) {
       return;
     }
 

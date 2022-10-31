@@ -27,9 +27,11 @@
     </ion-item>
 
     <div class="form-btn">
-      <ion-button class="form-btn" (click)="deleteClicked()" [disabled]="!auth.can('delete:drinks')">DELETE</ion-button>
+      <ion-button class="form-btn" (click)="deleteClicked()" [disabled]="!auth.isPermissionAccepted('delete:drinks')">
+        DELETE</ion-button>
       <ion-button (click)="closePopup()">CANCEL</ion-button>
-      <ion-button (click)="saveEvent()" [disabled]="!auth.can('post:drinks') || !auth.can('patch:drinks')">SAVE
+      <ion-button (click)="saveEvent()"
+        [disabled]="!auth.isPermissionAccepted('post:drinks') || !auth.isPermissionAccepted('patch:drinks')">SAVE
       </ion-button>
     </div>
   </form>
