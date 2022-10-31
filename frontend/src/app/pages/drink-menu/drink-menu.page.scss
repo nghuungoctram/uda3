@@ -5,23 +5,30 @@
 }
 
 .header-title {
+    font-size: 1.5em;
     font-family: 'Playfair Display', serif;
-    font-size: 1.7em;
     font-weight: bold;
+    background-color: rgb(246, 198, 248);
 }
 
 .display-drink {
-    align-items: center;
     display: flex;
-    flex-direction: column;
     cursor: pointer;
+    align-items: center;
+    flex-direction: column;
 }
 
 .opct {
-    opacity: .7;
+    opacity: .5;
+}
+
+.drink-menu-container {
+    padding-top: 30px;
+    display: flex;
+    justify-content: center;
 }
 
 .add-content {
-    font-size: 250%;
+    font-size: 55px;
     color: black;
 }

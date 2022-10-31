@@ -10,48 +10,48 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class DrinkFormComponent implements OnInit {
   @Input() drink: Drink;
-  @Input() isNew: boolean;
+  @Input() isCreated: boolean;
 
   constructor(
     public auth: AuthService,
-    private modalCtrl: ModalController,
+    private modalController: ModalController,
     private drinkService: DrinksService
   ) { }
 
   ngOnInit() {
-    if (this.isNew) {
+    if (this.isCreated) {
       this.drink = {
-        id: -1,
+        id: 0,
         title: '',
         recipe: []
       };
-      this.addIngredient();
+      this.addMoreKindOfDrink();
     }
   }
 
-  customTrackBy(index: number): any {
-    return index;
+  trackById(idx: number): any {
+    return idx;
   }
 
-  addIngredient(i: number = 0) {
-    this.drink.recipe.splice(i + 1, 0, { name: '', color: 'white', parts: 1 });
+  addMoreKindOfDrink(idx: number = 0) {
+    this.drink.recipe.splice(idx + 1, 0, { name: '', color: '#F98C60', parts: 2 });
   }
 
-  removeIngredient(i: number) {
-    this.drink.recipe.splice(i, 1);
-  }
-
-  closeModal() {
-    this.modalCtrl.dismiss();
-  }
-
-  saveClicked() {
+  saveEvent() {
     this.drinkService.saveDrink(this.drink);
-    this.closeModal();
+    this.closePopup();
+  }
+
+  removeKindOfDrink(idx: number) {
+    this.drink.recipe.splice(idx, 1);
   }
 
   deleteClicked() {
     this.drinkService.deleteDrink(this.drink);
-    this.closeModal();
+    this.closePopup();
+  }
+
+  closePopup() {
+    this.modalController.dismiss();
   }
 }

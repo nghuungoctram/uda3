@@ -14,25 +14,24 @@ export class DrinkMenuPage implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private modalCtrl: ModalController,
-    public drinks: DrinksService
+    public drinks: DrinksService,
+    private modalController: ModalController
   ) { }
 
   ngOnInit() {
     this.drinks.getDrinks();
   }
 
-  async openForm(activedrink: Drink = null) {
+  async formOpened(activedrink: Drink = null) {
     if (!this.auth.can('get:drinks-detail')) {
       return;
     }
 
-    const modal = await this.modalCtrl.create({
+    const getModel = await this.modalController.create({
       component: DrinkFormComponent,
-      componentProps: { drink: activedrink, isNew: !activedrink }
+      componentProps: { drink: activedrink, isCreated: !activedrink }
     });
 
-    modal.present();
+    getModel.present();
   }
-
 }

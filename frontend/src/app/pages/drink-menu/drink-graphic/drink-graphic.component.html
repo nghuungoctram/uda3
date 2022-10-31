@@ -1,9 +1,4 @@
-<div class="cup">
-  <div 
-  *ngFor="let ingredient of drink && drink.recipe"
-  class="ingredient"
-  [style.flexGrow]="ingredient.parts"
-  [style.background]="ingredient.color">
-    {{t}}
+<div class="dink-display-container">
+  <div *ngFor="let kind of drink && drink.recipe" [style.flexGrow]="kind.parts" [style.background]="kind.color">
   </div>
 </div>
