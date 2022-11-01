@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from './auth.service';
-import { environment } from 'src/environments/environment';
+import { environment } from 'src/environment/environment';
 
 export interface Drink {
   id: number;
@@ -16,6 +16,7 @@ export interface Drink {
 @Injectable({
   providedIn: 'root'
 })
+
 export class DrinksService {
   url = environment.apiServerUrl;
   public items: { [key: number]: Drink } = {};

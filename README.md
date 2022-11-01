@@ -30,7 +30,7 @@ npm install
 
 Ionic uses a configuration file to manage environment variables. These variables ship with the transpiled software and should not include secrets.
 
-- Open `./src/environments/environments.ts` and ensure each variable reflects the system you stood up for the backend.
+- Open `./src/environment/environments.ts` and ensure each variable reflects the system you stood up for the backend.
 
 ## Running Your Frontend in Dev Mode
 

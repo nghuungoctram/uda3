@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { environment } from '../../environments/environment';
+import { environment } from '../../environment/environment';
 
 const JWTS_LOCAL_KEY = 'JWTS_LOCAL_KEY';
 const JWTS_ACTIVE_INDEX_KEY = 'JWTS_ACTIVE_INDEX_KEY';
@@ -20,7 +20,8 @@ export class AuthService {
 
   loginPath(callbackPath = '') {
     let path = 'https://';
-    path += this.url + '/authorize?';
+    path += this.url + '.us.auth0.com';
+    path += '/authorize?';
     path += 'audience=' + this.audience + '&';
     path += 'response_type=token&';
     path += 'client_id=' + this.clientId + '&';
